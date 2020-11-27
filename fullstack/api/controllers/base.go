@@ -7,8 +7,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 
-	_ "github.com/jinzhu/gorm/dialects/mysql"    //mysql database driver
-	_ "github.com/jinzhu/gorm/dialects/postgres" //postgres database driver
+	"github.com/jinzhu/gorm/dialects/postgres"
 
 	"github.com/b3rgman/fullstack/api/models"
 )
@@ -22,7 +21,7 @@ func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, D
 
 	var err error
 
-	if Dbdriver == "mysql" {
+	if Dbdriver == "postgres" {
 		DBURL := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", DbUser, DbPassword, DbHost, DbPort, DbName)
 		server.DB, err = gorm.Open(Dbdriver, DBURL)
 		if err != nil {
